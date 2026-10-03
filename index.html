@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Містичний Веб-Квест</title>
+    <title>Шкільний Веб-Квест</title>
     <!-- Tailwind CSS for modern, responsive styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter & Cinzel -->
@@ -17,10 +17,10 @@
             font-family: 'Cinzel', serif;
         }
         @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 15px rgba(236, 72, 153, 0.4); }
-            50% { box-shadow: 0 0 30px rgba(236, 72, 153, 0.8); }
+            0%, 100% { box-shadow: 0 0 15px rgba(16, 185, 129, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(16, 185, 129, 0.8); }
         }
-        .glow-pink {
+        .glow-emerald {
             animation: pulse-glow 3s infinite;
         }
         @keyframes float-item {
@@ -50,40 +50,39 @@
         <!-- Background Room Scene Overlay - Crystal clear and fully visible -->
         <div id="ambient-overlay" class="absolute inset-0 pointer-events-none transition-all duration-1000 z-0 bg-cover bg-center opacity-95"></div>
         <div id="ambient-gradient" class="absolute inset-0 pointer-events-none transition-colors duration-1000 z-0 bg-slate-950/20"></div>
-        <div class="p-3 bg-slate-800/50 rounded-lg border border-slate-700 text-center">
-            <span class="text-xs text-emerald-400 font-semibold">Увага: Завдання виконується в режимі реального часу!</span>
-        </div>
+
         <!-- 1. AUTHORIZATION SCREEN -->
         <div id="auth-screen" class="relative z-10 w-full max-w-md bg-slate-900/90 backdrop-blur-md p-8 rounded-2xl border border-slate-700 shadow-2xl text-center">
             <div class="mb-6">
-                <span class="text-4xl">🔮</span>
-                    <h1 class="text-5xl font-extrabold cinzel-font mt-2 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Я на уроці</h1>
-                    <p class="text-base text-yellow-300 mt-2">Я на уроці і виконую практичну роботу з редагування коду!</p>
+                <span class="text-5xl">⭐</span>
+                <h1 class="text-3xl font-extrabold cinzel-font mt-2 bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">Шкільний Квест</h1>
+                <p class="text-base text-emerald-300 font-semibold mt-3">Я на уроці! Пройди три кімнати, розгадай таємниці та отримай найкращу оцінку!</p>
+                <!-- Додано новий HTML-елемент вручну (бейдж з інформацією про урок) -->
+                <div class="mt-3 inline-block px-3 py-1 bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 rounded-full text-xs font-bold uppercase tracking-wide">
+                    📚 Інформатика • Практична робота
+                </div>
             </div>
             
             <form id="auth-form" onsubmit="handleAuth(event)" class="space-y-4 text-left">
                 <div>
                     <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">Прізвище та Ім'я (українською)</label>
                     <input type="text" id="fullname-input" placeholder="Наприклад: Шевченко Тарас" 
-                           class="w-full px-4 py-3 bg-slate-800/90 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 text-slate-100 placeholder-slate-400 transition-all">
+                           class="w-full px-4 py-3 bg-slate-800/90 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 text-slate-100 placeholder-slate-400 transition-all">
                     <p id="auth-error" class="text-rose-400 text-xs mt-1.5 hidden">Будь ласка, введіть справжнє прізвище та ім'я українськими літерами (без цифр і латиниці).</p>
                 </div>
-                    <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold rounded-xl shadow-lg transition-all transform active:scale-95">
-                        Старт завдання
-                    </button>
+                <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold rounded-xl shadow-lg transition-all transform active:scale-95">
+                    Увійти до гри 🚀
+                </button>
             </form>
         </div>
-                <div class="flex items-center space-x-2 bg-slate-900/70 px-3 py-1.5 rounded-xl border border-slate-700/60">
-                    <span class="text-xs text-slate-300 uppercase font-semibold">Статус:</span>
-                    <span class="text-xs font-bold text-emerald-400">В процесі</span>
-                </div>
+
         <!-- 2. GAMEPLAY ROOMS CONTAINER -->
         <div id="game-container" class="hidden relative z-10 w-full max-w-5xl flex flex-col space-y-4">
             
             <!-- Top HUD: Room title, Timer, Inventory & Player info -->
             <div class="bg-slate-900/80 backdrop-blur-md border border-slate-700/60 p-4 rounded-2xl flex flex-wrap justify-between items-center gap-4 shadow-xl">
                 <div class="flex items-center space-x-3">
-                    <div id="room-badge" class="px-3 py-1 bg-pink-500/20 border border-pink-500/40 text-pink-300 rounded-lg text-xs font-bold uppercase tracking-wider">Кімната 1</div>
+                    <div id="room-badge" class="px-3 py-1 bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 rounded-lg text-xs font-bold uppercase tracking-wider">Кімната 1</div>
                     <h2 id="room-title" class="text-xl font-bold cinzel-font text-white">Кімната Принцеси</h2>
                 </div>
                 
@@ -97,7 +96,7 @@
                     </div>
                     <div class="flex items-center space-x-2 bg-slate-900/70 px-3 py-1.5 rounded-xl border border-slate-700/60">
                         <span class="text-xs text-slate-300 uppercase font-semibold">⏱️ Час в кімнаті:</span>
-                        <span id="room-timer" class="text-sm font-mono font-bold text-pink-400">05:00</span>
+                        <span id="room-timer" class="text-sm font-mono font-bold text-emerald-400">05:00</span>
                     </div>
                 </div>
             </div>
@@ -118,9 +117,9 @@
                 <!-- Room Navigation / Footer actions -->
                 <div class="flex justify-between items-center pt-2 border-t border-white/15 bg-slate-950/50 backdrop-blur-md px-4 py-2 rounded-xl">
                     <button onclick="showManualHint()" class="px-4 py-2 bg-slate-900/85 hover:bg-slate-800 border border-slate-700/80 rounded-xl text-xs font-semibold text-slate-200 transition flex items-center space-x-2 shadow">
-                        <span>💡 Запитати підказку</span>
+                        <span>💡 Отримати підказку</span>
                     </button>
-                    <div id="room-status-msg" class="text-xs font-semibold text-pink-300 animate-pulse drop-shadow"></div>
+                    <div id="room-status-msg" class="text-xs font-semibold text-emerald-300 animate-pulse drop-shadow"></div>
                 </div>
             </div>
         </div>
@@ -129,12 +128,12 @@
         <div id="victory-screen" class="hidden relative z-10 w-full max-w-lg bg-slate-900/90 backdrop-blur-md p-8 rounded-3xl border border-slate-700 shadow-2xl text-center">
             <div class="mb-4">
                 <span class="text-6xl">🏆</span>
-                <h1 class="text-3xl font-extrabold cinzel-font mt-3 bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">Перемога!</h1>
+                <h1 class="text-3xl font-extrabold cinzel-font mt-3 bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">Чудовий результат!</h1>
                 <p id="victory-greeting" class="text-slate-300 mt-3 font-medium"></p>
             </div>
-            <p class="text-sm text-slate-400 mb-6">Ти успішно подолав(ла) всі три містичні кімнати, розгадав(ла) загадки та здобув(ла) омріяну свободу!</p>
+            <p class="text-sm text-slate-400 mb-6">Ти успішно пройшов(ла) практичне завдання на уроці інформатики, розгадав(ла) усі містичні загадки та отримав(ла) 12 балів!</p>
             <button onclick="location.reload()" class="px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold rounded-xl shadow-lg transition-all">
-                Зіграти знову
+                Пройти знову
             </button>
         </div>
 
@@ -152,14 +151,14 @@
 
             <div class="flex justify-end space-x-3">
                 <button onclick="closeModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold transition">Закрити</button>
-                <button id="modal-action-btn" class="hidden px-4 py-2 bg-pink-600 hover:bg-pink-500 text-white rounded-xl text-xs font-bold transition">Підтвердити</button>
+                <button id="modal-action-btn" class="hidden px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition">Підтвердити</button>
             </div>
         </div>
     </div>
 
     <!-- FOOTER -->
     <footer class="relative z-10 py-3 text-center text-xs text-slate-500 border-t border-slate-900">
-        Веб-квест розроблено спеціально для підлітків • Усі права захищено © 2026
+        Шкільний веб-квест • Урок інформатики © 2026
     </footer>
 
     <script>
@@ -178,8 +177,8 @@
             1: {
                 id: 1,
                 name: "Кімната Принцеси",
-                badgeBg: "bg-pink-500/20 border-pink-500/40 text-pink-300",
-                bgGradient: "from-pink-950/20 via-rose-950/20 to-slate-950/30",
+                badgeBg: "bg-emerald-500/20 border-emerald-500/40 text-emerald-300",
+                bgGradient: "from-emerald-950/20 via-teal-950/20 to-slate-950/30",
                 bgImage: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1600&q=80",
                 description: "Яскрава кімната у пастельних тонах. Досліди декоративну квітку, щоб дізнатися кількість пелюсток для розгадки чарівного дзеркала!",
                 autoHint: "Підказка: Спершу оглянь декоративну квітку на наявність підказки до дзеркала.",
@@ -351,7 +350,7 @@
                 const btn = document.createElement("div");
                 // Distinct styling for exit doors to make them stand out clearly
                 const isExit = obj.type === "exit";
-                const borderClass = isExit ? 'border-amber-400 bg-slate-900/90 glow-pink' : (obj.solved ? 'border-emerald-500/60 opacity-90' : 'border-slate-600/70 hover:border-pink-500');
+                const borderClass = isExit ? 'border-amber-400 bg-slate-900/90 glow-emerald' : (obj.solved ? 'border-emerald-500/60 opacity-90' : 'border-slate-600/70 hover:border-emerald-500');
                 
                 btn.className = `cursor-pointer bg-slate-900/85 hover:bg-slate-900/95 backdrop-blur-md border ${borderClass} p-5 rounded-2xl flex flex-col items-center justify-center space-y-2 transition-all transform hover:scale-105 ${isExit ? '' : 'float-anim'} shadow-2xl min-w-[130px]`;
                 btn.onclick = () => interactWithObject(obj);
@@ -384,7 +383,7 @@
                 let htmlContent = `<p class="mb-4">${obj.desc}</p>`;
                 if (obj.answer) {
                     htmlContent += `
-                        <input type="text" id="puzzle-answer-input" placeholder="Введіть відповідь..." class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-slate-100 focus:outline-none focus:ring-2 focus:ring-pink-500 mb-2">
+                        <input type="text" id="puzzle-answer-input" placeholder="Введіть відповідь..." class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 mb-2">
                         <p id="puzzle-error" class="text-rose-400 text-xs hidden">Невірна відповідь. Спробуйте ще раз або скористайтеся підказкою!</p>
                     `;
                 }
@@ -467,7 +466,7 @@
                 return;
             }
             listEl.innerHTML = player.inventory.map(item => `
-                <span class="px-2 py-0.5 bg-pink-500/20 border border-pink-500/40 text-pink-300 rounded-lg text-xs font-semibold">${item}</span>
+                <span class="px-2 py-0.5 bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 rounded-lg text-xs font-semibold">${item}</span>
             `).join('');
         }
 
