@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Я на уроці</title>
+    <title>Містичний Веб-Квест</title>
     <!-- Tailwind CSS for modern, responsive styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter & Cinzel -->
@@ -17,8 +17,8 @@
             font-family: 'Cinzel', serif;
         }
         @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 15px rgba(255, 0, 147); }
-            50% { box-shadow: 0 0 30px rgba(255, 0, 147); }
+            0%, 100% { box-shadow: 0 0 15px rgba(236, 72, 153, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(236, 72, 153, 0.8); }
         }
         .glow-pink {
             animation: pulse-glow 3s infinite;
@@ -50,13 +50,15 @@
         <!-- Background Room Scene Overlay - Crystal clear and fully visible -->
         <div id="ambient-overlay" class="absolute inset-0 pointer-events-none transition-all duration-1000 z-0 bg-cover bg-center opacity-95"></div>
         <div id="ambient-gradient" class="absolute inset-0 pointer-events-none transition-colors duration-1000 z-0 bg-slate-950/20"></div>
-
+        <div class="p-3 bg-slate-800/50 rounded-lg border border-slate-700 text-center">
+            <span class="text-xs text-emerald-400 font-semibold">Увага: Завдання виконується в режимі реального часу!</span>
+        </div>
         <!-- 1. AUTHORIZATION SCREEN -->
         <div id="auth-screen" class="relative z-10 w-full max-w-md bg-slate-900/90 backdrop-blur-md p-8 rounded-2xl border border-slate-700 shadow-2xl text-center">
             <div class="mb-6">
                 <span class="text-4xl">🔮</span>
-                <h1 class="text-3xl font-extrabold cinzel-font mt-2 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Магічний Квест</h1>
-                <p class="text-sm text-slate-300 mt-2">Пройди три кімнати, розгадай таємниці за допомогою підказок та виберися на свободу!</p>
+                    <h1 class="text-5xl font-extrabold cinzel-font mt-2 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Я на уроці</h1>
+                    <p class="text-base text-yellow-300 mt-2">Я на уроці і виконую практичну роботу з редагування коду!</p>
             </div>
             
             <form id="auth-form" onsubmit="handleAuth(event)" class="space-y-4 text-left">
@@ -66,12 +68,15 @@
                            class="w-full px-4 py-3 bg-slate-800/90 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-500 text-slate-100 placeholder-slate-400 transition-all">
                     <p id="auth-error" class="text-rose-400 text-xs mt-1.5 hidden">Будь ласка, введіть справжнє прізвище та ім'я українськими літерами (без цифр і латиниці).</p>
                 </div>
-                <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold rounded-xl shadow-lg transition-all transform active:scale-95">
-                    Розпочати пригоду
-                </button>
+                    <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold rounded-xl shadow-lg transition-all transform active:scale-95">
+                        Старт завдання
+                    </button>
             </form>
         </div>
-
+                <div class="flex items-center space-x-2 bg-slate-900/70 px-3 py-1.5 rounded-xl border border-slate-700/60">
+                    <span class="text-xs text-slate-300 uppercase font-semibold">Статус:</span>
+                    <span class="text-xs font-bold text-emerald-400">В процесі</span>
+                </div>
         <!-- 2. GAMEPLAY ROOMS CONTAINER -->
         <div id="game-container" class="hidden relative z-10 w-full max-w-5xl flex flex-col space-y-4">
             
